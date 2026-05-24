@@ -15,12 +15,3 @@ A high-performance, responsive MERN stack infrastructure built from scratch to s
 
 ---
 
-## 💻 Local Installation & Setup
-
-### Prerequisites
-Make sure you have **Node.js** and **MongoDB** installed and running on your local machine.
-
-### 1. Clone the Workspace
-```bash
-git clone <your-repository-link>
-cd transport-logistics-system
