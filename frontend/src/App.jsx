@@ -7,15 +7,15 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [loading, setLoading] = useState(false);
 
-  // Core Global States linked to Database Collections
+  
   const [vehicles, setVehicles] = useState([]);
   const [trips, setTrips] = useState([]);
 
-  // Form Input States
+  
   const [vehicleForm, setVehicleForm] = useState({ vehicleNumber: '', driverName: '', driverPhone: '' });
   const [tripForm, setTripForm] = useState({ tripId: '', vehicleId: '', destination: '', cargoDetails: '' });
 
-  // 1. FETCH DATA FROM BACKEND ON MOUNT
+  
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -37,7 +37,7 @@ export default function App() {
     fetchData();
   }, [activeTab]);
 
-  // 2. WORKFLOW TRANSITION HANDLER (PUT /api/trips/:id)
+  
   const handleStatusTransition = async (id, currentStatus) => {
     let nextStatus = 'Scheduled';
     if (currentStatus === 'Scheduled') nextStatus = 'In Transit';
@@ -52,7 +52,7 @@ export default function App() {
       });
       const result = await response.json();
       if (result.success) {
-        // Refresh local data streams immediately
+        
         fetchData();
       }
     } catch (error) {
@@ -60,7 +60,7 @@ export default function App() {
     }
   };
 
-  // 3. REGISTER NEW VEHICLE (POST /api/vehicles)
+  
   const handleAddVehicle = async (e) => {
     e.preventDefault();
     try {
@@ -82,7 +82,7 @@ export default function App() {
     }
   };
 
-  // 4. SCHEDULE NEW LOGISTICS TRIP (POST /api/trips)
+  
   const handleCreateTrip = async (e) => {
     e.preventDefault();
     try {
@@ -104,7 +104,7 @@ export default function App() {
     }
   };
 
-  // Compute live responsive counts from backend data stream
+ 
   const scheduledCount = trips.filter(t => t.deliveryStatus === 'Scheduled').length;
   const inTransitCount = trips.filter(t => t.deliveryStatus === 'In Transit').length;
   const deliveredCount = trips.filter(t => t.deliveryStatus === 'Delivered').length;
@@ -155,7 +155,7 @@ export default function App() {
         </div>
       </aside>
 
-      {/* MAIN CONTENT AREA */}
+      
       <main className="flex-1 flex flex-col overflow-y-auto">
         <header className="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between shadow-sm">
           <div className="flex items-center gap-2">
@@ -182,7 +182,7 @@ export default function App() {
                 <p className="text-sm text-slate-500 mt-1">Real-time breakdown of trips, ongoing journeys, and industrial vehicle telemetry.</p>
               </div>
 
-              {/* METRICS ROW */}
+             
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                   <div>
@@ -209,7 +209,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* LIVE SHIPMENT LINE-ITEMS GRID */}
+              
               <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
                   <h3 className="font-bold text-slate-900 text-base">Active Supply Chain Shipments</h3>
@@ -278,7 +278,7 @@ export default function App() {
                 </form>
               </div>
 
-              {/* TRIP DISPATCH FORM */}
+              
               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                 <div>
                   <h3 className="font-bold text-slate-900 text-base flex items-center gap-2"><Navigation size={18} className="text-blue-600" /> Schedule Consignment Trip</h3>
