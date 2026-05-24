@@ -1,122 +1,98 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState } from 'react';
+import { Truck, LayoutDashboard, PlusCircle, Navigation, Layers, ShieldAlert } from 'lucide-react';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [activeTab, setActiveTab] = useState('dashboard');
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <div className="flex h-screen bg-slate-50 font-sans text-slate-800 antialiased">
+      {/* 1. LEFT SIDEBAR */}
+      <aside className="w-64 bg-slate-900 text-slate-200 flex flex-col justify-between shadow-xl">
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+          {/* Company Branding Logo Area */}
+          <div className="p-6 flex items-center gap-3 border-b border-slate-800">
+            <div className="bg-blue-600 p-2 rounded-lg text-white shadow-lg shadow-blue-500/30">
+              <Truck size={24} />
+            </div>
+            <div>
+              <h2 className="font-bold text-lg leading-tight tracking-wide text-white">LogiMfg AI</h2>
+              <span className="text-xs text-slate-400 font-medium">Transport Workspace</span>
+            </div>
+          </div>
 
-      <div className="ticks"></div>
+          {/* Navigation Items */}
+          <nav className="p-4 space-y-1">
+            <button
+              onClick={() => setActiveTab('dashboard')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 ${
+                activeTab === 'dashboard'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+              }`}
+            >
+              <LayoutDashboard size={18} />
+              <span>Logistics Dashboard</span>
+            </button>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+            <button
+              onClick={() => setActiveTab('manage')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 ${
+                activeTab === 'manage'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+              }`}
+            >
+              <PlusCircle size={18} />
+              <span>Manage Fleet & Trips</span>
+            </button>
+          </nav>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {/* Sidebar Footer Info */}
+        <div className="p-4 border-t border-slate-800 text-center">
+          <p className="text-xs text-slate-500 font-medium">Isaii AI Assessment Round</p>
+        </div>
+      </aside>
+
+      {/* 2. MAIN CONTENT AREA */}
+      <main className="flex-1 flex flex-col overflow-y-auto">
+        {/* Top Header */}
+        <header className="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between shadow-sm">
+          <div className="flex items-center gap-2">
+            <Navigation size={16} className="text-blue-600 animate-pulse" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Live Infrastructure Monitoring</span>
+          </div>
+          <div className="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-medium border border-emerald-200">
+            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
+            <span>System Operational</span>
+          </div>
+        </header>
+
+        {/* Dynamic Content Views */}
+        <div className="p-8 max-w-7xl w-full mx-auto space-y-8">
+          {activeTab === 'dashboard' ? (
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Logistics Dashboard</h1>
+              <p className="text-sm text-slate-500 mt-1">Real-time breakdown of trips, ongoing journeys, and industrial vehicle telemetry.</p>
+              
+              {/* Dummy Placeholder for Analytics Cards to test state changes */}
+              <div className="mt-6 p-12 bg-white rounded-2xl border border-slate-200 text-center text-slate-400">
+                Dashboard Grid content will sit right here.
+              </div>
+            </div>
+          ) : (
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Manage Fleet & Operations</h1>
+              <p className="text-sm text-slate-500 mt-1">Register new heavy machinery vehicles or deploy transport shipments across channels.</p>
+              
+              {/* Dummy Placeholder for Forms */}
+              <div className="mt-6 p-12 bg-white rounded-2xl border border-slate-200 text-center text-slate-400">
+                Management Forms will sit right here.
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
+    </div>
+  );
 }
-
-export default App
